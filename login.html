@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>POSH | Login</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:Arial,sans-serif;
+  background:#f5f7fb;color:#17253b;
+}
+header{
+  background:#122a48;color:white;
+  padding:22px;text-align:center;
+}
+header h1{margin:0;color:#f9bc52}
+main{
+  max-width:440px;margin:60px auto;
+  background:white;padding:35px;
+  border-radius:14px;
+  box-shadow:0 5px 25px #0001;
+}
+h2{text-align:center}
+label{display:block;margin:16px 0 6px}
+input{
+  width:100%;padding:13px;
+  border:1px solid #ccd4df;border-radius:7px;
+}
+button{
+  width:100%;padding:14px;margin-top:16px;
+  background:#f9bc52;border:0;
+  border-radius:7px;font-weight:bold;
+  cursor:pointer;
+}
+.social{background:#edf1f6}
+a{color:#176c80}
+.links{text-align:center;margin-top:22px}
+#message{margin-top:15px;text-align:center}
+@media(max-width:480px){
+ main{margin:20px 12px;padding:24px}
+}
+</style>
+</head>
+<body>
+<header>
+<h1>POSH</h1>
+<p>Discover. Connect. Grow.</p>
+</header>
+
+<main>
+<h2>Welcome Back</h2>
+<p style="text-align:center">
+Login to your POSH account
+</p>
+
+<form id="loginForm">
+<label for="email">Email address</label>
+<input type="email" id="email" required>
+
+<label for="password">Password</label>
+<input type="password" id="password" required>
+
+<label>
+<input type="checkbox" id="remember"
+style="width:auto" checked>
+ Remember me
+</label>
+
+<button type="submit" id="loginButton">
+Login
+</button>
+</form>
+
+<button class="social" onclick="socialLogin('google')">
+Continue with Google
+</button>
+
+<button class="social" onclick="socialLogin('github')">
+Continue with GitHub
+</button>
+
+<div class="links">
+<p><a href="#" id="resetLink">Forgot password?</a></p>
+<p>Don't have an account?
+<a href="register.html">Register here</a></p>
+<p><a href="index.html">Back to marketplace</a></p>
+</div>
+<p id="message" role="status"></p>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="posh-config.js"></script>
+<script>
+const client=window.supabase.createClient(
+ window.POSH_SUPABASE_URL,
+ window.POSH_SUPABASE_PUBLISHABLE_KEY,
+ {auth:{persistSession:true}}
+);
+
+const message=document.getElementById("message");
+
+document.getElementById("loginForm")
+.addEventListener("submit",async(e)=>{
+ e.preventDefault();
+ const button=document.getElementById("loginButton");
+ button.disabled=true;
+ message.textContent="Signing in...";
+ const {error}=await client.auth.signInWithPassword({
+  email:document.getElementById("email").value.trim(),
+  password:document.getElementById("password").value
+ });
+ button.disabled=false;
+ if(error){
+  message.textContent=error.message;
+  return;
+ }
+ window.location.href="account.html";
+});
+
+async function socialLogin(provider){
+ const {error}=await client.auth.signInWithOAuth({
+  provider,
+  options:{
+   redirectTo:new URL("account.html",location.href).href
+  }
+ });
+ if(error)message.textContent=error.message;
+}
+
+document.getElementById("resetLink")
+.addEventListener("click",async(e)=>{
+ e.preventDefault();
+ const email=prompt("Enter your account email:");
+ if(!email)return;
+ const {error}=await client.auth.resetPasswordForEmail(
+  email.trim(),
+  {redirectTo:new URL("reset-password.html",location.href).href}
+ );
+ message.textContent=error?
+  error.message:"If the account exists, check your email.";
+});
+</script>
+</body>
+</html>
