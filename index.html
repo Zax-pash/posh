@@ -6,6 +6,317 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>POSH | Business Marketplace</title>
 <style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <title>POSH Marketplace</title>
+  <style>
+    :root {
+      --navy: #122a48;
+      --teal: #176c80;
+      --gold: #f9bc52;
+      --light: #f5f7fa;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--navy);
+      background: var(--light);
+    }
+
+    header {
+      background: var(--navy);
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .logo {
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    .register {
+      background: var(--gold);
+      color: var(--navy);
+      padding: 11px 18px;
+      border-radius: 7px;
+      font-weight: bold;
+    }
+
+    .hero {
+      background: linear-gradient(
+        120deg, var(--navy), var(--teal)
+      );
+      color: white;
+      text-align: center;
+      padding: 85px 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 5vw, 56px);
+      margin: 0 0 15px;
+    }
+
+    .hero p {
+      font-size: 19px;
+      margin-bottom: 30px;
+    }
+
+    .search {
+      display: flex;
+      max-width: 650px;
+      margin: auto;
+      background: white;
+      border-radius: 9px;
+      overflow: hidden;
+    }
+
+    .search input {
+      flex: 1;
+      min-width: 0;
+      padding: 17px;
+      border: none;
+      font-size: 16px;
+    }
+
+    .search button {
+      background: var(--gold);
+      border: none;
+      padding: 0 25px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    section {
+      padding: 55px 6%;
+    }
+
+    h2 {
+      font-size: 29px;
+      margin-bottom: 25px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(210px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 3px 14px #00000012;
+    }
+
+    .card img {
+      width: 100%;
+      height: 175px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 18px;
+    }
+
+    .card h3 {
+      margin: 0 0 9px;
+    }
+
+    .card p {
+      color: #526174;
+      margin: 0;
+    }
+
+    .cta {
+      background: var(--teal);
+      color: white;
+      text-align: center;
+    }
+
+    .cta a {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      text-decoration: none;
+      padding: 14px 25px;
+      border-radius: 7px;
+      font-weight: bold;
+    }
+
+    footer {
+      background: var(--navy);
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+
+    @media (max-width: 600px) {
+      header { justify-content: center; }
+      nav { justify-content: center; }
+      .hero { padding: 60px 18px; }
+      .search { flex-direction: column; }
+      .search button { padding: 15px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">POSH</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="#categories">Categories</a>
+    <a href="#businesses">Businesses</a>
+    <a href="login.html">Login</a>
+    <a class="register"
+       href="register.html">Register</a>
+  </nav>
+</header>
+
+<main>
+  <div class="hero">
+    <h1>Discover. Connect. Grow.</h1>
+    <p>
+      Discover trusted businesses,
+      products and services near you.
+    </p>
+    <form class="search" id="searchForm">
+      <input id="searchInput"
+        type="search"
+        placeholder="Search businesses or services..."
+        aria-label="Search businesses"
+        required>
+      <button type="submit">Search</button>
+    </form>
+  </div>
+
+  <section id="categories">
+    <h2>Explore Categories</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="card-content">
+          <h3>Restaurants</h3>
+          <p>Food, cafés and catering</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <h3>Beauty & Salons</h3>
+          <p>Beauty and wellness services</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <h3>Fashion & Shops</h3>
+          <p>Clothing, bags and accessories</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <h3>Electronics</h3>
+          <p>Phones, computers and gadgets</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="businesses">
+    <h2>Discover Businesses</h2>
+    <div class="grid">
+      <article class="card">
+        <img
+          src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=700"
+          alt="Restaurant interior">
+        <div class="card-content">
+          <h3>Restaurants & Cafés</h3>
+          <p>Explore places to eat.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <img
+          src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=700"
+          alt="Beauty salon">
+        <div class="card-content">
+          <h3>Salons & Beauty</h3>
+          <p>Find beauty professionals.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <img
+          src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=700"
+          alt="Fashion shop">
+        <div class="card-content">
+          <h3>Fashion & Retail</h3>
+          <p>Explore local shops.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Grow Your Business with POSH</h2>
+    <p>
+      Register your business and reach
+      more potential customers.
+    </p>
+    <a href="register.html">
+      Register Your Business
+    </a>
+  </section>
+</main>
+
+<footer>
+  <p>© 2026 POSH Marketplace</p>
+  <p>Discover. Connect. Grow.</p>
+</footer>
+
+<script>
+  document.getElementById("searchForm")
+    .addEventListener("submit", function(event) {
+      event.preventDefault();
+      const query = document
+        .getElementById("searchInput")
+        .value.trim();
+
+      if (query) {
+        document.getElementById("businesses")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+    });
+</script>
+
+</body>
+</html>
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
